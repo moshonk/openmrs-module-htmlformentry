@@ -368,4 +368,15 @@ public class VelocityFunctions {
         }
         return matches;
     }
+    
+    public String globalPropertyValue(String globalPropertyName) {
+    	if (globalPropertyName == null) {
+    		return null;
+    	}    	
+    	String globalPropertyValue = Context.getAdministrationService().getGlobalProperty(globalPropertyName);
+    	if (globalPropertyValue == null) {
+    		throw new IllegalArgumentException("No Global Property found for:" + globalPropertyName);
+    	}
+    	return globalPropertyValue;
+    }
 }

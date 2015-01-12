@@ -214,5 +214,13 @@ public class VelocityFunctionsTest extends BaseModuleContextSensitiveTest {
         Locale en = functions.locale("en");
         assertThat(en, is(Locale.ENGLISH));
     }
+    
+    @Test
+    public void getGlobalPropertyValue_shouldReturnGlobalPropertyValue() throws Exception {
+    	VelocityFunctions functions = setupFunctionsForPatient(7);
+    	
+    	String globalPropertyValue = functions.globalPropertyValue("concept.false");
+    	assertThat(globalPropertyValue,is("1066"));    	
+    } 
 
 }
