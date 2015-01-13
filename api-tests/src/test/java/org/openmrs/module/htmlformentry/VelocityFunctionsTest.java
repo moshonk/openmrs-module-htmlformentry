@@ -216,11 +216,11 @@ public class VelocityFunctionsTest extends BaseModuleContextSensitiveTest {
     }
     
     @Test
-    public void getGlobalPropertyValue_shouldReturnGlobalPropertyValue() throws Exception {
+    public void getGlobalPropertyValue_shouldReturnGlobalPropertyValueGivenPropertyName() throws Exception {
     	VelocityFunctions functions = setupFunctionsForPatient(7);
     	
-    	String globalPropertyValue = functions.globalPropertyValue("concept.false");
-    	assertThat(globalPropertyValue,is("1066"));    	
+    	assertThat(functions.globalPropertyValue("concept.false"),is("8"));   
+    	assertThat(functions.globalPropertyValue("concept.causeOfDeath"),nullValue());
     } 
 
 }
