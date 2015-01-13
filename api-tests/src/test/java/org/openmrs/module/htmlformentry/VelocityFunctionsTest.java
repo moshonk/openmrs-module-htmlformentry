@@ -220,7 +220,7 @@ public class VelocityFunctionsTest extends BaseModuleContextSensitiveTest {
     	VelocityFunctions functions = setupFunctionsForPatient(7);
     	
     	assertThat(functions.globalPropertyValue("concept.false"),is("8"));   
-    	assertThat(functions.globalPropertyValue("concept.causeOfDeath"),nullValue());
+    	assertThat(functions.globalPropertyValue(null),nullValue());
     } 
 
 }
