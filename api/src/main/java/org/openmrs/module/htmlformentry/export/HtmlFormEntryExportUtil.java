@@ -189,6 +189,8 @@ public class HtmlFormEntryExportUtil {
         ret.setLocation(e.getLocation());
         ret.setDateCreated(e.getDateCreated());
         ret.setPatient(e.getPatient());
+        ret.setForm(e.getForm());
+        ret.setEncounterType(e.getEncounterType());
         //renders new encounter unsave-able:
         ret.setEncounterId(e.getEncounterId());
         
@@ -248,6 +250,7 @@ public class HtmlFormEntryExportUtil {
         append(DEFAULT_QUOTE).append("ENCOUNTER_DATE").append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR).
         append(DEFAULT_QUOTE).append("ENCOUNTER_LOCATION").append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR).
         append(DEFAULT_QUOTE).append("ENCOUNTER_PROVIDER").append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR).
+        append(DEFAULT_QUOTE).append("ENCOUNTER_TYPE").append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR).
         append(DEFAULT_QUOTE).append("INTERNAL_PATIENT_ID").append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR);
         int index = 1;
         for (PatientIdentifierType pit :  pitList){
@@ -368,6 +371,7 @@ public class HtmlFormEntryExportUtil {
             sb.append(DEFAULT_QUOTE).append(DATE_FORMATTER.format(e.getEncounterDatetime())).append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR);
             sb.append(DEFAULT_QUOTE).append(e.getLocation().getName()).append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR);
             sb.append(DEFAULT_QUOTE).append(e.getProvider().getGivenName()+ " " + e.getProvider().getFamilyName()).append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR);
+            sb.append(DEFAULT_QUOTE).append(e.getEncounterType().getName()).append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR);         
             sb.append(DEFAULT_QUOTE).append((e.getPatient() != null ? e.getPatient().getPatientId() : EMPTY)).append(DEFAULT_QUOTE).append(DEFAULT_COLUMN_SEPARATOR);       
             int index = 1;
             for (PatientIdentifierType pit :  pitList){
@@ -377,7 +381,7 @@ public class HtmlFormEntryExportUtil {
                 index ++;
             }
             
-            FormEntrySession session = new FormEntrySession(e.getPatient(), e, Mode.VIEW, form, null); // session doesn't get HttpSession
+            FormEntrySession session = new FormEntrySession(e.getPatient(), e, Mode.EDIT, form, null); // session doesn't get HttpSession
             session.getHtmlToDisplay();
             FormSubmissionController  fsa = session.getSubmissionController();
             List<FormSubmissionControllerAction> actions = fsa.getActions();
